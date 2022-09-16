@@ -7,6 +7,7 @@ import 'package:stone/common/widgets/app.dart';
 import 'package:stone/common/widgets/button.dart';
 import 'package:stone/common/widgets/image.dart';
 import 'package:stone/common/widgets/input.dart';
+import 'package:stone/common/widgets/video_player.dart';
 import 'package:stone/pages/deatil/controller.dart';
 
 class DeviceDetailPage extends GetView<DeviceDetailController> {
@@ -157,10 +158,29 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                               crossAxisSpacing: 10,
                               childAspectRatio: 1 / 0.5,
                               children: controller
-                                  .state.deviceItem.value.allChannelIds!
-                                  .map((channelId) => _buildItem(channelId))
+                                  .state.deviceItem.value.deviceChannels!
+                                  .where((element) => element.byEnable == 1)
+                                  .map((deviceChannel) =>
+                                      _buildItem(deviceChannel.channelId!))
                                   .toList(),
                             )
+                          ],
+                        )
+                      : const SizedBox(height: 10),
+                  controller.state.previewVisible.value
+                      ? Column(
+                          children: [
+                            ListView.builder(
+                              itemCount: controller
+                                  .state.deviceItem.value.deviceChannels!
+                                  .where((element) => element.byEnable == 1)
+                                  .toList()
+                                  .length,
+                              itemBuilder: (context, index) => HlsPlayer(
+                                  src:
+                                      '$SERVER_CAMERA_URL/stream/${controller.state.deviceItem.value.deviceId}/channel/${controller.state.deviceItem.value.deviceChannels?[index].channelId}/hlsll/live/index.m3u8'),
+                              shrinkWrap: true,
+                            ),
                           ],
                         )
                       : const SizedBox(height: 10)

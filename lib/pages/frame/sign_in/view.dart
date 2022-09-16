@@ -115,14 +115,14 @@ class SignInPage extends GetView<SignInController> {
                 btnFlatButtonWidget(
                   onPressed: controller.handleNavSignUp,
                   gbColor: AppColors.thirdElement,
-                  title: "Sign up",
+                  title: "注册",
                 ),
                 Spacer(),
                 // 登录
                 btnFlatButtonWidget(
                   onPressed: controller.handleSignIn,
                   gbColor: AppColors.primaryElement,
-                  title: "Sign in",
+                  title: "登录",
                 ),
               ],
             ),

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         maxOverScrollExtent: 100,
         footerTriggerDistance: 150,
         child: GetMaterialApp(
-          title: '石聊',
+          title: '灵石',
           theme: AppTheme.light,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,

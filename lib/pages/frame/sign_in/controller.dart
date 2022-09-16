@@ -35,6 +35,7 @@ class SignInController extends GetxController {
 
   // 执行登录操作
   handleSignIn() async {
+    // 输入框校验
     // if (!duIsEmail(_emailController.value.text)) {
     //   toastInfo(msg: '请正确输入邮件');
     //   return;
@@ -60,9 +61,12 @@ class SignInController extends GetxController {
     UserLoginResponseEntity userProfile = await UserAPI.login(
       params: params,
     );
-    UserStore.to.saveProfile(userProfile);
-    print(UserStore.to.isLogin);
-    Get.offAndToNamed(AppRoutes.Application);
+    if (userProfile.accessToken!.isNotEmpty) {
+      UserStore.to.setToken(userProfile.accessToken!);
+      UserStore.to.saveProfile(userProfile);
+      print(UserStore.to.isLogin);
+      Get.offAndToNamed(AppRoutes.Application);
+    }
   }
 
   @override

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stone/common/routers/routes.dart';
+import 'package:stone/common/store/user.dart';
 import 'package:stone/common/values/colors.dart';
-import 'package:stone/common/widgets/button.dart';
 import 'package:stone/common/widgets/widgets.dart';
 import 'package:stone/pages/account/controller.dart';
 
@@ -11,12 +12,16 @@ class AccountPage extends GetView<AccountController> {
   Widget _button() {
     return btnFlatButtonWidget(
       onPressed: () {
-        toastInfo(msg: "你点它干啥!");
+        // 注销登录
+        UserStore.to.onLogout();
+        print(UserStore.to.isLogin);
+        Get.offAndToNamed(AppRoutes.SIGN_IN);
       },
       gbColor: AppColors.primaryElement,
-      title: "Sign in",
+      title: "退出",
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

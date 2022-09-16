@@ -9,7 +9,7 @@ AppBar transparentAppBar({
   List<Widget>? actions,
 }) {
   return AppBar(
-    backgroundColor: Colors.transparent,
+    // backgroundColor: Colors.transparent,
     elevation: 0,
     title: title != null
         ? Center(

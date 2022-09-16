@@ -8,6 +8,7 @@ class EventPage extends GetView<EventController> {
 
   @override
   Widget build(BuildContext context) {
-    return const EventPageList();
+    return const Text("待开发...");
+    // return const EventPageList();
   }
 }

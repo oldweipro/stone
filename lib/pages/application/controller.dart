@@ -93,7 +93,7 @@ class ApplicationController extends GetxController {
     // handleIncomingLinks();
 
     // 准备一些静态数据
-    tabTitles = ['首页', '分类', '设备', '我的'];
+    tabTitles = ['设备', '事件', '监控', '我的'];
     bottomTabs = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(
@@ -104,7 +104,7 @@ class ApplicationController extends GetxController {
           Iconfont.home,
           color: AppColors.secondaryElementText,
         ),
-        label: 'main',
+        label: '设备',
         backgroundColor: AppColors.primaryBackground,
       ),
       const BottomNavigationBarItem(
@@ -116,7 +116,7 @@ class ApplicationController extends GetxController {
           Iconfont.grid,
           color: AppColors.secondaryElementText,
         ),
-        label: 'category',
+        label: '事件',
         backgroundColor: AppColors.primaryBackground,
       ),
       const BottomNavigationBarItem(
@@ -128,7 +128,7 @@ class ApplicationController extends GetxController {
           Iconfont.tag,
           color: AppColors.secondaryElementText,
         ),
-        label: 'tag',
+        label: '监控',
         backgroundColor: AppColors.primaryBackground,
       ),
       const BottomNavigationBarItem(

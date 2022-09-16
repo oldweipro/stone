@@ -91,6 +91,4 @@ class Iconfont {
     fontFamily: 'Iconfont',
     matchTextDirection: true,
   );
-
-
 }

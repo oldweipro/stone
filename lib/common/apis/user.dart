@@ -11,7 +11,15 @@ class UserAPI {
       '/user/login',
       data: params?.toJson(),
     );
-    return UserLoginResponseEntity.fromJson(response);
+    // return UserLoginResponseEntity.fromJson(response);
+    return UserLoginResponseEntity(
+        accessToken: "accessToken",
+        displayName: "老卫同学",
+        channels: [
+          "gogoo",
+          "aaaa"
+        ]
+    );
   }
 
   /// 注册
@@ -30,7 +38,15 @@ class UserAPI {
     var response = await HttpUtil().post(
       '/user/profile',
     );
-    return UserLoginResponseEntity.fromJson(response);
+    // return UserLoginResponseEntity.fromJson(response);
+    return UserLoginResponseEntity(
+        accessToken: "accessToken",
+        displayName: "老卫同学",
+        channels: [
+          "gogoo",
+          "aaaa"
+        ]
+    );
   }
 
   /// Logout

@@ -102,6 +102,6 @@ class DeviceDetailController extends GetxController {
   }
 
   playPreviewVisibleClick() {
-    toastInfo(msg: "正在开发中...");
+    state.previewVisible.value = !state.previewVisible.value;
   }
 }

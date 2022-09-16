@@ -25,11 +25,16 @@ class UserStore extends GetxController {
   void onInit() {
     super.onInit();
     token = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
-    var profileOffline = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
-    // TODO 在这里检查是否有缓存，如果有，则直接设置 profile，(还有isLogin暂时先写在这里，还没想好合适不)
-    if (profileOffline.isNotEmpty) {
-      _profile(UserLoginResponseEntity.fromJson(jsonDecode(profileOffline)));
-      _isLogin(true);
+    if (token.isEmpty) {
+      print("token已失效");
+    } else {
+      // TODO 在这里检查是否有缓存，如果有，则直接设置 profile，(还有isLogin暂时先写在这里，还没想好合适不)
+      var profileOffline = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
+      print("检查token: $token, 检查个人信息: $profileOffline");
+      if (profileOffline.isNotEmpty) {
+        _profile(UserLoginResponseEntity.fromJson(jsonDecode(profileOffline)));
+        _isLogin(true);
+      }
     }
   }
 
@@ -56,7 +61,7 @@ class UserStore extends GetxController {
 
   // 注销
   Future<void> onLogout() async {
-    if (_isLogin.value) await UserAPI.logout();
+    // if (_isLogin.value) await UserAPI.logout();
     await StorageService.to.remove(STORAGE_USER_TOKEN_KEY);
     _isLogin.value = false;
     token = '';

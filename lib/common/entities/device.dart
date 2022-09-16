@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 /// 设备分页 request
 class DevicePageListRequestEntity {
   String? keyword;
@@ -64,6 +66,7 @@ class DeviceItem {
   String? httpPort;
   String? dhcpAbility;
   String? deviceSn;
+  String? deviceId;
   DateTime? bootTime;
   String? mac;
   String? dhcp;
@@ -88,6 +91,7 @@ class DeviceItem {
   List<int>? analogChannelIds;
   List<int>? digitalChannelIds;
   List<int>? allChannelIds;
+  List<DeviceChannel>? deviceChannels;
 
   DeviceItem({
     this.types,
@@ -108,6 +112,7 @@ class DeviceItem {
     this.httpPort,
     this.dhcpAbility,
     this.deviceSn,
+    this.deviceId,
     this.bootTime,
     this.mac,
     this.dhcp,
@@ -131,6 +136,7 @@ class DeviceItem {
     this.analogChannelIds,
     this.digitalChannelIds,
     this.allChannelIds,
+    this.deviceChannels,
   });
 
   factory DeviceItem.fromJson(Map<String, dynamic> json) => DeviceItem(
@@ -152,6 +158,7 @@ class DeviceItem {
         httpPort: json["httpPort"],
         dhcpAbility: json["dhcpAbility"],
         deviceSn: json["deviceSn"],
+    deviceId: json["deviceId"],
         bootTime: DateTime.parse(json["bootTime"]),
         mac: json["mac"],
         dhcp: json["dhcp"],
@@ -181,6 +188,10 @@ class DeviceItem {
         allChannelIds: json["allChannelIds"] == null
             ? []
             : List<int>.from(json["allChannelIds"]),
+        deviceChannels: json["deviceChannels"] == null
+            ? []
+            : List<DeviceChannel>.from(
+                json["deviceChannels"].map((x) => DeviceChannel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -202,6 +213,7 @@ class DeviceItem {
         "httpPort": httpPort,
         "dhcpAbility": dhcpAbility,
         "deviceSn": deviceSn,
+        "deviceId": deviceId,
         "bootTime": bootTime?.toIso8601String(),
         "mac": mac,
         "dhcp": dhcp,
@@ -225,5 +237,30 @@ class DeviceItem {
         "analogChannelIds": analogChannelIds,
         "digitalChannelIds": digitalChannelIds,
         "allChannelIds": allChannelIds,
+        "deviceChannels": deviceChannels,
       };
+}
+
+class DeviceChannel {
+  int? channelId = 0;
+  int? byEnable;
+  String? rtspStream;
+
+  DeviceChannel({
+    this.channelId,
+    this.byEnable,
+    this.rtspStream,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "channelId": channelId,
+        "byEnable": byEnable,
+        "rtspStream": rtspStream,
+      };
+
+  factory DeviceChannel.fromJson(Map<String, dynamic> json) => DeviceChannel(
+        channelId: json["channelId"],
+        byEnable: json["byEnable"],
+        rtspStream: json["rtspStream"],
+      );
 }
