@@ -1,9 +1,12 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stone/common/values/values.dart';
 import 'package:video_player/video_player.dart';
 
 class HlsPlayer extends StatefulWidget {
   final String src;
+
   const HlsPlayer({Key? key, required this.src}) : super(key: key);
 
   @override
@@ -51,21 +54,24 @@ class _HlsPlayerState extends State<HlsPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 250,
-      child: _chewieController != null &&
-          _chewieController!.videoPlayerController.value.isInitialized
-          ? Chewie(
-        controller: _chewieController!,
-      )
-          : Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          CircularProgressIndicator(),
-          SizedBox(height: 20),
-          Text('加载中...'),
-        ],
-      ),
-    );
+    return _chewieController != null &&
+            _chewieController!.videoPlayerController.value.isInitialized
+        ? Container(
+            height: 166.w,
+            decoration: const BoxDecoration(
+              borderRadius: Radii.k6pxRadius,
+            ),
+            child: Chewie(
+              controller: _chewieController!,
+            ),
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              CircularProgressIndicator(),
+              SizedBox(height: 20),
+              Text('加载中...'),
+            ],
+          );
   }
 }

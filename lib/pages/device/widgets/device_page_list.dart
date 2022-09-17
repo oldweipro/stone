@@ -30,7 +30,7 @@ class _DevicePageListState extends State<DevicePageList>
   @override
   void didPopNext() {
     print('oh yes, didPopNext');
-    controller.fetchDeviceList(isRefresh: true);
+    controller.fetchDeviceList();
   }
 
   @override
@@ -52,9 +52,8 @@ class _DevicePageListState extends State<DevicePageList>
               ),
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
-                      (content, index) {
-                    var item = controller.state.deviceList[index];
-                    return deviceListItem(item);
+                  (content, index) {
+                    return deviceListItem(controller.state.deviceList[index]);
                   },
                   childCount: controller.state.deviceList.length,
                 ),

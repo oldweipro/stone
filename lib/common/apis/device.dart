@@ -35,6 +35,17 @@ class DeviceAPI {
     return ResponseResult.fromJson(response);
   }
 
+  // 修改设备信息
+  static Future<ResponseResult> modifyDeviceInfo({
+    RequestDeviceInfoParams? params,
+  }) async {
+    var response = await HttpUtil().post(
+      '/api/device/modifyDeviceInfo',
+      data: params?.toJson(),
+    );
+    return ResponseResult.fromJson(response);
+  }
+
   // 设备注销
   static Future<ResponseResult> deviceClean({
     String? ipv4Address,
@@ -45,7 +56,7 @@ class DeviceAPI {
     return ResponseResult.fromJson(response);
   }
 
-  /// refresh 是否刷新
+  /// 根据IP获取设备信息
   static Future<ResponseResult> deviceInfoByIp({
     required String ipv4Address,
   }) async {
@@ -56,9 +67,8 @@ class DeviceAPI {
   }
 
   // 设备布防
-  static Future<ResponseResult> deviceSetupAlarm({
-    required String ipv4Address
-  }) async {
+  static Future<ResponseResult> deviceSetupAlarm(
+      {required String ipv4Address}) async {
     var response = await HttpUtil().post(
       '/api/device/setupAlarm/$ipv4Address',
     );
@@ -84,13 +94,12 @@ class DeviceAPI {
     int? picSize,
   }) async {
     var response = await HttpUtil().get(
-      '/api/device/captureJpegPictureToLocal/$ipv4Address',
-      queryParameters: {
-        "channelId": channelId,
-        "picQuality": picQuality,
-        "picSize": picSize,
-      }
-    );
+        '/api/device/captureJpegPictureToLocal/$ipv4Address',
+        queryParameters: {
+          "channelId": channelId,
+          "picQuality": picQuality,
+          "picSize": picSize,
+        });
     return ResponseResult.fromJson(response);
   }
 }

@@ -3,11 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:stone/common/values/colors.dart';
 import 'package:stone/common/values/server.dart';
-import 'package:stone/common/widgets/app.dart';
-import 'package:stone/common/widgets/button.dart';
-import 'package:stone/common/widgets/image.dart';
-import 'package:stone/common/widgets/input.dart';
 import 'package:stone/common/widgets/video_player.dart';
+import 'package:stone/common/widgets/widgets.dart';
 import 'package:stone/pages/deatil/controller.dart';
 
 class DeviceDetailPage extends GetView<DeviceDetailController> {
@@ -21,7 +18,7 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
           alignment: Alignment.center,
           width: 100,
           height: 30,
-          child: Text("$channelId"),
+          child: Text("通道$channelId"),
         ),
       );
 
@@ -48,7 +45,9 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                 Icons.search,
                 color: AppColors.primaryText,
               ),
-              onPressed: () {},
+              onPressed: () {
+                toastInfo(msg: "别点了，没开发...");
+              },
             )
           ],
         ),
@@ -56,13 +55,23 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
           child: Center(
             child: Container(
               width: 295.w,
-              margin: EdgeInsets.only(top: 49.h),
+              margin: EdgeInsets.only(top: 10.h),
               child: Column(
                 children: [
-                  netImageCached(
-                    "$SERVER_API_URL${controller.state.deviceItem.value.screenPicture}",
-                    width: 221.w,
-                    height: 121.w,
+                  Column(
+                    children: [
+                      ListView.builder(
+                        itemCount: controller
+                            .state.deviceItem.value.deviceChannels!
+                            .where((element) => element.byEnable == 1)
+                            .toList()
+                            .length,
+                        itemBuilder: (context, index) => HlsPlayer(
+                            src:
+                                '$SERVER_CAMERA_URL/stream/${controller.state.deviceItem.value.deviceId}/channel/${controller.state.deviceItem.value.deviceChannels?[index].channelId}/hls/live/index.m3u8'),
+                        shrinkWrap: true,
+                      ),
+                    ],
                   ),
                   inputTextEdit(
                     controller: controller.titleController,
@@ -72,7 +81,7 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                   ),
                   inputTextEdit(
                     controller: controller.ipController,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.visiblePassword,
                     hintText: "IP地址",
                     marginTop: 10,
                   ),
@@ -138,11 +147,11 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                           title: "截图",
                         ),
                         const Spacer(),
-                        // 登录
+                        // 修改设备信息
                         btnFlatButtonWidget(
-                          onPressed: controller.playPreviewVisibleClick,
+                          onPressed: controller.modifyDeviceInfoClick,
                           gbColor: AppColors.primaryElement,
-                          title: "预览",
+                          title: "修改",
                         ),
                       ],
                     ),
@@ -167,23 +176,16 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                           ],
                         )
                       : const SizedBox(height: 10),
-                  controller.state.previewVisible.value
-                      ? Column(
-                          children: [
-                            ListView.builder(
-                              itemCount: controller
-                                  .state.deviceItem.value.deviceChannels!
-                                  .where((element) => element.byEnable == 1)
-                                  .toList()
-                                  .length,
-                              itemBuilder: (context, index) => HlsPlayer(
-                                  src:
-                                      '$SERVER_CAMERA_URL/stream/${controller.state.deviceItem.value.deviceId}/channel/${controller.state.deviceItem.value.deviceChannels?[index].channelId}/hlsll/live/index.m3u8'),
-                              shrinkWrap: true,
-                            ),
-                          ],
-                        )
-                      : const SizedBox(height: 10)
+                  SizedBox(
+                    child: netImageCached(
+                      "$SERVER_API_URL${controller.state.deviceItem.value.screenPicture}",
+                      width: 221.w,
+                      height: 121.w,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40.w,
+                  )
                 ],
               ),
             ),

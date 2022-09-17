@@ -43,3 +43,13 @@ class RequestLoginParams {
         "commandPort": commandPort,
       };
 }
+
+class RequestDeviceInfoParams extends RequestLoginParams {
+  RequestDeviceInfoParams({
+    super.title,
+    required super.ipv4Address,
+    required super.username,
+    required super.password,
+    required super.commandPort,
+  });
+}

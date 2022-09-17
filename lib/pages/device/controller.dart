@@ -19,8 +19,8 @@ class DeviceController extends GetxController {
   /// 成员变量
   String deviceCode = '';
   int curPage = 1;
-  int pageSize = 6;
-  int total = 6;
+  int pageSize = 5;
+  int total = 5;
 
   /// 事件
 
@@ -75,5 +75,4 @@ class DeviceController extends GetxController {
     // dispose 释放对象
     refreshController.dispose();
   }
-
 }

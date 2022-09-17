@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:stone/common/apis/device.dart';
 import 'package:stone/common/entities/device.dart';
 import 'package:stone/common/entities/request.dart';
-import 'package:stone/common/values/server.dart';
 import 'package:stone/common/widgets/widgets.dart';
 import 'package:stone/pages/deatil/state.dart';
 
@@ -30,7 +29,13 @@ class DeviceDetailController extends GetxController {
   }
 
   _refresh() {
-    deviceInfoByIp();
+    // 更新上一页列表中的信息
+    state.deviceItem.value.title = titleController.text;
+    state.deviceItem.value.ipv4Address = ipController.text;
+    state.deviceItem.value.username = usernameController.text;
+    state.deviceItem.value.password = passwordController.text;
+    state.deviceItem.value.commandPort = commandPortController.text;
+    // deviceInfoByIp();
   }
 
   // 设备登录
@@ -45,7 +50,7 @@ class DeviceDetailController extends GetxController {
     var result = await DeviceAPI.deviceLogin(
       params: requestLoginParams,
     );
-    _refresh();
+    deviceInfoByIp();
     toastInfo(msg: result.msg ?? "设备注册");
   }
 
@@ -54,7 +59,7 @@ class DeviceDetailController extends GetxController {
     var result = await DeviceAPI.deviceClean(
       ipv4Address: ipController.value.text,
     );
-    _refresh();
+    deviceInfoByIp();
     toastInfo(msg: result.msg ?? "设备注销");
   }
 
@@ -71,7 +76,7 @@ class DeviceDetailController extends GetxController {
     var result = await DeviceAPI.deviceSetupAlarm(
       ipv4Address: ipController.value.text,
     );
-    _refresh();
+    deviceInfoByIp();
     toastInfo(msg: result.msg ?? "设备布防");
   }
 
@@ -80,7 +85,7 @@ class DeviceDetailController extends GetxController {
     var result = await DeviceAPI.deviceCloseAlarm(
       ipv4Address: ipController.value.text,
     );
-    _refresh();
+    deviceInfoByIp();
     toastInfo(msg: result.msg ?? "设备撤防");
   }
 
@@ -92,8 +97,8 @@ class DeviceDetailController extends GetxController {
       picQuality: 0,
       picSize: 0,
     );
-    state.deviceItem.value.screenPicture = "$SERVER_API_URL${result.data}";
-    _refresh();
+    // TODO 直接改变state.deviceItem.value.screenPicture = result.data;不起作用;不知道为什么执行deviceInfoByIp();就可以刷新页面
+    deviceInfoByIp();
     toastInfo(msg: result.msg ?? "设备截图");
   }
 
@@ -101,7 +106,18 @@ class DeviceDetailController extends GetxController {
     state.channelVisible.value = !state.channelVisible.value;
   }
 
-  playPreviewVisibleClick() {
-    state.previewVisible.value = !state.previewVisible.value;
+  modifyDeviceInfoClick() async {
+    RequestDeviceInfoParams requestDeviceInfoParams = RequestDeviceInfoParams(
+      title: titleController.value.text,
+      ipv4Address: ipController.value.text,
+      username: usernameController.value.text,
+      password: passwordController.value.text,
+      commandPort: commandPortController.value.text,
+    );
+    var result = await DeviceAPI.modifyDeviceInfo(
+      params: requestDeviceInfoParams,
+    );
+    _refresh();
+    toastInfo(msg: result.msg ?? "设备信息修改");
   }
 }
