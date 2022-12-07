@@ -58,8 +58,17 @@ class SignInController extends GetxController {
     //   print("登录结果");
     // }
 
-    UserLoginResponseEntity userProfile = await UserAPI.login(
-      params: params,
+    // TODO 写死后端返回的用户实体及token
+    // UserLoginResponseEntity userProfile = await UserAPI.login(
+    //   params: params,
+    // );
+    UserLoginResponseEntity userProfile = UserLoginResponseEntity(
+        accessToken: "accessToken",
+        displayName: "老卫同学",
+        channels: [
+          "gogoo",
+          "aaaa"
+        ]
     );
     if (userProfile.accessToken!.isNotEmpty) {
       UserStore.to.setToken(userProfile.accessToken!);

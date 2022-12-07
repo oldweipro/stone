@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stone/common/routers/routes.dart';
 import 'package:stone/common/store/user.dart';
+import 'package:stone/common/utils/mqtt.dart';
 import 'package:stone/common/values/colors.dart';
 import 'package:stone/common/widgets/widgets.dart';
 import 'package:stone/pages/account/controller.dart';
@@ -26,7 +27,12 @@ class AccountPage extends GetView<AccountController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _button(),
+        child: Column(
+          children: [
+            _button(),
+            // const Mqtt(setCode: 22,),
+          ],
+        ),
       ),
     );
   }
