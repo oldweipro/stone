@@ -71,7 +71,7 @@ class SignUpPage extends GetView<SignUpController> {
           Padding(
             padding: EdgeInsets.only(top: 8.0),
             child: TextButton(
-              onPressed: controller.handleFogotPassword,
+              onPressed: controller.handleForgotPassword,
               child: Text(
                 "Fogot password?",
                 textAlign: TextAlign.center,

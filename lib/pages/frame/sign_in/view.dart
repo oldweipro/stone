@@ -54,7 +54,7 @@ class SignInPage extends GetView<SignInController> {
           Container(
             margin: EdgeInsets.only(top: 15.h),
             child: Text(
-              "SECTOR",
+              "灵石云",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.primaryText,
@@ -63,17 +63,6 @@ class SignInPage extends GetView<SignInController> {
                 fontSize: 24.sp,
                 height: 1,
               ),
-            ),
-          ),
-          Text(
-            "news",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.primaryText,
-              fontFamily: "Avenir",
-              fontWeight: FontWeight.w400,
-              fontSize: 16.sp,
-              height: 1,
             ),
           ),
         ],
@@ -93,7 +82,7 @@ class SignInPage extends GetView<SignInController> {
           inputTextEdit(
             controller: controller.emailController,
             keyboardType: TextInputType.emailAddress,
-            hintText: "Email",
+            hintText: "邮箱",
             marginTop: 0,
             // autofocus: true,
           ),
@@ -101,7 +90,7 @@ class SignInPage extends GetView<SignInController> {
           inputTextEdit(
             controller: controller.passController,
             keyboardType: TextInputType.visiblePassword,
-            hintText: "Password",
+            hintText: "密码",
             isPassword: true,
           ),
 
@@ -133,9 +122,9 @@ class SignInPage extends GetView<SignInController> {
           Padding(
             padding: EdgeInsets.only(top: 8.0),
             child: TextButton(
-              onPressed: controller.handleFogotPassword,
+              onPressed: controller.handleForgotPassword,
               child: Text(
-                "Fogot password?",
+                "忘记密码?",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.secondaryElementText,
@@ -161,7 +150,7 @@ class SignInPage extends GetView<SignInController> {
         children: <Widget>[
           // title
           Text(
-            "Or sign in with social networks",
+            "或使用社交网络登录",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: AppColors.primaryText,
@@ -209,7 +198,7 @@ class SignInPage extends GetView<SignInController> {
         width: 294,
         gbColor: AppColors.secondaryElement,
         fontColor: AppColors.primaryText,
-        title: "Sign up",
+        title: "注册",
         fontWeight: FontWeight.w500,
         fontSize: 16,
       ),

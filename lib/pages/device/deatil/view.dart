@@ -5,7 +5,7 @@ import 'package:stone/common/values/colors.dart';
 import 'package:stone/common/values/server.dart';
 import 'package:stone/common/widgets/video_player.dart';
 import 'package:stone/common/widgets/widgets.dart';
-import 'package:stone/pages/deatil/controller.dart';
+import 'package:stone/pages/device/deatil/controller.dart';
 
 class DeviceDetailPage extends GetView<DeviceDetailController> {
   const DeviceDetailPage({Key? key}) : super(key: key);
@@ -67,8 +67,8 @@ class DeviceDetailPage extends GetView<DeviceDetailController> {
                             .toList()
                             .length,
                         itemBuilder: (context, index) => HlsPlayer(
-                            src:
-                                '$SERVER_CAMERA_URL/stream/${controller.state.deviceItem.value.deviceId}/channel/${controller.state.deviceItem.value.deviceChannels?[index].channelId}/hls/live/index.m3u8'),
+                            src: ''),
+                                // '$SERVER_CAMERA_URL/stream/${controller.state.deviceItem.value.deviceId}/channel/${controller.state.deviceItem.value.deviceChannels?[index].channelId}/hls/live/index.m3u8'),
                         shrinkWrap: true,
                       ),
                     ],

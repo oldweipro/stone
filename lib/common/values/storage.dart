@@ -16,5 +16,8 @@ const String STORAGE_INDEX_DEVICE_CACHE_KEY = 'cache_index_device';
 /// 首页事件消息cacheKey
 const String STORAGE_INDEX_EVENT_CACHE_KEY = 'cache_index_event';
 
+/// 首页事件消息cacheKey
+const String STORAGE_INDEX_TASK_CACHE_KEY = 'cache_index_task';
+
 /// 多语言
 const String STORAGE_LANGUAGE_CODE = 'language_code';

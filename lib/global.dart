@@ -1,8 +1,11 @@
+import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 // import 'package:im_flutter_sdk/im_flutter_sdk.dart';
 import 'package:stone/common/services/services.dart';
 import 'package:stone/common/store/store.dart';
+import 'package:stone/common/utils/amap.dart';
 import 'package:stone/common/utils/utils.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +18,7 @@ class Global {
 
     setSystemUi();
     Loading();
+    AMap();
 
     await Get.putAsync<StorageService>(() => StorageService().init());
 

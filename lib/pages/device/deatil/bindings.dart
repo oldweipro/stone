@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:stone/pages/deatil/controller.dart';
+import 'package:stone/pages/device/deatil/controller.dart';
 
 class DeviceDetailBinding implements Bindings {
   @override

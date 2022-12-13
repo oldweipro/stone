@@ -32,7 +32,7 @@ class SignUpController extends GetxController {
   }
 
   // 忘记密码
-  handleFogotPassword() {
+  handleForgotPassword() {
     toastInfo(msg: '忘记密码');
   }
 

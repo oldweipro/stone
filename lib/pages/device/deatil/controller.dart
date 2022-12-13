@@ -4,7 +4,7 @@ import 'package:stone/common/apis/device.dart';
 import 'package:stone/common/entities/device.dart';
 import 'package:stone/common/entities/request.dart';
 import 'package:stone/common/widgets/widgets.dart';
-import 'package:stone/pages/deatil/state.dart';
+import 'package:stone/pages/device/deatil/state.dart';
 
 class DeviceDetailController extends GetxController {
   DeviceDetailController();

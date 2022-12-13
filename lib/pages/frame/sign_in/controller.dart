@@ -29,25 +29,25 @@ class SignInController extends GetxController {
   }
 
   // 忘记密码
-  handleFogotPassword() {
+  handleForgotPassword() {
     toastInfo(msg: '忘记密码');
   }
 
   // 执行登录操作
   handleSignIn() async {
     // 输入框校验
-    // if (!duIsEmail(_emailController.value.text)) {
-    //   toastInfo(msg: '请正确输入邮件');
-    //   return;
-    // }
-    // if (!duCheckStringLength(_passController.value.text, 6)) {
-    //   toastInfo(msg: '密码不能小于6位');
-    //   return;
-    // }
+    if (!duIsEmail(emailController.value.text)) {
+      toastInfo(msg: '请正确输入邮件');
+      return;
+    }
+    if (!duCheckStringLength(passController.value.text, 6)) {
+      toastInfo(msg: '密码不能小于6位');
+      return;
+    }
 
     UserLoginRequestEntity params = UserLoginRequestEntity(
       email: emailController.value.text,
-      password: duSHA256(passController.value.text),
+      password: passController.value.text,
     );
     // try {
     //   await EMClient.getInstance.login(emailController.value.text, passController.value.text);
@@ -59,19 +59,15 @@ class SignInController extends GetxController {
     // }
 
     // TODO 写死后端返回的用户实体及token
-    // UserLoginResponseEntity userProfile = await UserAPI.login(
-    //   params: params,
-    // );
-    UserLoginResponseEntity userProfile = UserLoginResponseEntity(
-        accessToken: "accessToken",
-        displayName: "老卫同学",
-        channels: [
-          "gogoo",
-          "aaaa"
-        ]
+    UserLoginResponseEntity userProfile = await UserAPI.login(
+      params: params,
     );
-    if (userProfile.accessToken!.isNotEmpty) {
-      UserStore.to.setToken(userProfile.accessToken!);
+    if (userProfile.code != 0 ) {
+      toastInfo(msg: '${userProfile.msg}');
+      return;
+    }
+    if (userProfile.data['token']!.isNotEmpty) {
+      UserStore.to.setToken(userProfile.data['token']!);
       UserStore.to.saveProfile(userProfile);
       print(UserStore.to.isLogin);
       Get.offAndToNamed(AppRoutes.Application);

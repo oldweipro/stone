@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:stone/common/services/services.dart';
 import 'package:stone/common/store/store.dart';
 import 'package:stone/common/values/values.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -41,7 +42,9 @@ class HttpUtil {
       receiveTimeout: 5000,
 
       // Http请求头.
-      headers: {},
+      headers: {
+        'x-token': StorageService.to.getString(STORAGE_USER_TOKEN_KEY)
+      },
 
       /// 请求的Content-Type，默认值是"application/json; charset=utf-8".
       /// 如果您想以"application/x-www-form-urlencoded"格式编码请求数据,

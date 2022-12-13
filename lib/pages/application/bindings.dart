@@ -3,6 +3,7 @@ import 'package:stone/pages/category/index.dart';
 import 'package:stone/pages/device/index.dart';
 import 'package:stone/pages/event/controller.dart';
 import 'package:get/get.dart';
+import 'package:stone/pages/patrol/task/controller.dart';
 
 import 'controller.dart';
 
@@ -14,5 +15,6 @@ class ApplicationBinding implements Bindings {
     Get.lazyPut<DeviceController>(() => DeviceController());
     Get.lazyPut<EventController>(() => EventController());
     Get.lazyPut<AccountController>(() => AccountController());
+    Get.lazyPut<TaskController>(() => TaskController());
   }
 }

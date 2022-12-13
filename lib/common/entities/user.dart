@@ -44,27 +44,26 @@ class UserLoginRequestEntity {
 
 // 登录返回
 class UserLoginResponseEntity {
-  String? accessToken;
-  String? displayName;
-  List<String>? channels;
+  int? code;
+  dynamic data;
+  String? msg;
 
   UserLoginResponseEntity({
-    this.accessToken,
-    this.displayName,
-    this.channels,
+    this.code,
+    this.data,
+    this.msg,
   });
 
   factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
       UserLoginResponseEntity(
-        accessToken: json["access_token"],
-        displayName: json["display_name"],
-        channels: List<String>.from(json["channels"].map((x) => x)),
+        code: json["code"],
+        data: json["data"],
+        msg: json["msg"],
       );
 
   Map<String, dynamic> toJson() => {
-    "access_token": accessToken,
-    "display_name": displayName,
-    "channels":
-    channels == null ? [] : List<dynamic>.from(channels!.map((x) => x)),
+    "code": code,
+    "data": data,
+    "msg": msg,
   };
 }

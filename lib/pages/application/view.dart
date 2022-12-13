@@ -7,6 +7,8 @@ import 'package:stone/pages/device/index.dart';
 import 'package:stone/pages/event/view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:stone/pages/patrol/task/view.dart';
+import 'package:stone/pages/state/amap.dart';
 
 import 'index.dart';
 
@@ -43,9 +45,11 @@ class ApplicationPage extends GetView<ApplicationController> {
       controller: controller.pageController,
       onPageChanged: controller.handlePageChanged,
       children: const <Widget>[
-        DevicePage(),
-        EventPage(),
-        CategoryPage(),
+        TaskPage(),
+        // DevicePage(),
+        // CategoryPage(),
+        AMapView(),
+        AMapView(),
         AccountPage(),
       ],
     );

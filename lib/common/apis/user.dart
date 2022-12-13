@@ -8,7 +8,7 @@ class UserAPI {
     UserLoginRequestEntity? params,
   }) async {
     var response = await HttpUtil().post(
-      '/user/login',
+      '/base/emailLogin',
       data: params?.toJson(),
     );
     return UserLoginResponseEntity.fromJson(response);
@@ -30,15 +30,11 @@ class UserAPI {
     var response = await HttpUtil().post(
       '/user/profile',
     );
-    // return UserLoginResponseEntity.fromJson(response);
-    return UserLoginResponseEntity(
-        accessToken: "accessToken",
-        displayName: "老卫同学",
-        channels: [
-          "gogoo",
-          "aaaa"
-        ]
-    );
+    return UserLoginResponseEntity.fromJson(response);
+    // return UserLoginResponseEntity(
+    //     accessToken: "accessToken",
+    //     displayName: "老卫同学",
+    // );
   }
 
   /// Logout
